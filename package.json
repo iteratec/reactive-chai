@@ -6,7 +6,9 @@
   "author": "Christoph Murczek <Christoph.Murczek@iteratec.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "postbuild": "cpx package.json dist",
+    "release": "semantic-release"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
@@ -14,6 +16,7 @@
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/exec": "^3.3.5",
     "@semantic-release/git": "^7.0.16",
+    "cpx": "^1.5.0",
     "husky": "^3.0.2",
     "semantic-release": "^15.13.19"
   },
@@ -26,5 +29,30 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "cpx CHANGELOG.md dist"
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "pkgRoot": "dist"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": "CHANGELOG.md"
+        }
+      ]
+    ]
   }
 }
