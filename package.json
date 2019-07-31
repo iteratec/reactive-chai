@@ -1,0 +1,30 @@
+{
+  "name": "@iteratec/reactive-chai",
+  "version": "1.0.0-semantically-released",
+  "description": "a chai plugin for reactive assertions",
+  "main": "index.js",
+  "author": "Christoph Murczek <Christoph.Murczek@iteratec.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/exec": "^3.3.5",
+    "@semantic-release/git": "^7.0.16",
+    "husky": "^3.0.2",
+    "semantic-release": "^15.13.19"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
